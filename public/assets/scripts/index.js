@@ -10,33 +10,20 @@ function weatherCall() {
         if(res.cod == '200') {
             console.log('success')
             response = res
-            check()
+            responseFormat()
         }else{}
     })
-}
-
-function check() {
-    console.log(response.list)
-    hr24Check()
 }
 
 function responseFormat() {
     let obj = []
     for(const i of response.list) {
         let timeStamp = new Date(i.dt*1000)
-        let loopObj = {time: new Date(i.dt*1000), temp: Math.round(tempConv(i.main.temp)) + '°f', sky: i.weather[0].description, wind: i.wind.speed}
-        console.log(loopObj)
+        let loopObj = {time: new Date(i.dt*1000), temp: Math.round(tempConv(i.main.temp)), sky: i.weather[0].description, wind: i.wind.speed}
         obj.push(loopObj)
     }
     response = obj
     console.log(response)
-}
-
-function hr24Check() {
-    for(var i = 0 ; i < 8; i++) {
-        console.log(Math.round(tempConv(response.list[i].main.temp)) + '°f')
-    }
-    responseFormat()
 }
 
 function tempConv(input) {
@@ -44,3 +31,15 @@ function tempConv(input) {
 }
 
 weatherCall()
+
+//rate poolability and hottubability for 24 hrs and for 5 day span
+
+//what makes ze pool perfect?
+// low wind
+// clear sky
+// sun is up
+// best temp
+
+// what makes hot tub perfect?
+// cooler temps
+// day or night
