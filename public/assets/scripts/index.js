@@ -1,5 +1,4 @@
 const APIKey = "8bebd070f80dace3c5498124f468dc36"
-var response;
 
 function weatherCall() {
     var queryURL = `https://api.openweathermap.org/data/2.5/forecast?zip=80110&appid=${APIKey}`
@@ -22,8 +21,7 @@ function responseFormat() {
         let loopObj = {time: new Date(i.dt*1000), temp: Math.round(tempConv(i.main.temp)), sky: i.weather[0].description, wind: i.wind.speed}
         obj.push(loopObj)
     }
-    response = obj
-    console.log(response)
+    scoring(obj)
 }
 
 function tempConv(input) {
